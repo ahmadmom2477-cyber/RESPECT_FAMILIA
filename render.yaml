@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: respect-family
+    runtime: node
+    buildCommand: pnpm install && BASE_PATH=/ pnpm --filter @workspace/respect-family run build && pnpm --filter @workspace/api-server run build
+    startCommand: NODE_ENV=production node --enable-source-maps artifacts/api-server/dist/index.mjs
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: BASE_PATH
+        value: /
+      - key: ADMIN_EMAILS
+        value: 3x51hb@gmail.com,abdulrhman.enawj@gmail.com
+      - key: CLERK_PUBLISHABLE_KEY
+        sync: false
+      - key: CLERK_SECRET_KEY
+        sync: false
+      - key: MONGODB_URI
+        sync: false
+      - key: APIFY_API_TOKEN
+        sync: false
